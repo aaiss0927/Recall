@@ -238,7 +238,7 @@ try:
 
         with col2:
             st.header("기억 회상 상태")
-            with st.expander("전체 이야기 보기", expanded=False):
+            with st.expander("전체 이야기", expanded=True):
                 st.info(st.session_state.story)
             
             st.subheader("✅ 성공한 기억 조각")
@@ -259,15 +259,9 @@ try:
                 st.progress(1.0, "모든 기억 조각을 찾았어요! 🎉")
             
             st.divider()
-            st.subheader("비용 추적")
             tokens = st.session_state.session_tokens
             st.metric(label="총 사용 토큰", value=f"{tokens['total']:,}")
             st.caption(f"(입력: {tokens['prompt']:,} / 출력: {tokens['completion']:,})")
-            
-            if st.button("새로운 대화 시작하기"):
-                for key in list(st.session_state.keys()):
-                    del st.session_state[key]
-                st.rerun()
 
 except Exception as e:
     st.error(f"오류가 발생했습니다. OpenAI API 키를 확인해주세요: {e}")
